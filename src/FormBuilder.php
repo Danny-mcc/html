@@ -691,6 +691,7 @@ class FormBuilder
      *
      * @return \Illuminate\Support\HtmlString
      */
+
     protected function placeholderOption($display, $selected)
     {
         $selected = $this->getSelectedValue(null, $selected);
@@ -698,7 +699,12 @@ class FormBuilder
         $options = compact('selected');
         $options['value'] = '';
 
-        return $this->toHtmlString('<option' . $this->html->attributes($options) . '>' . e($display) . '</option>');
+        $placeholderAttributes = 'disabled="disabled" ';
+        if($selected == null){
+            $placeholderAttributes .= 'selected="selected" ';
+        }
+
+        return $this->toHtmlString('<option ' . $placeholderAttributes . $this->html->attributes($options) . '>' . e($display) . '</option>');
     }
 
     /**
